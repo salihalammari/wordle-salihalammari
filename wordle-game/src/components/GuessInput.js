@@ -1,42 +1,39 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { makeGuess } from '../features/game/gameSlice';
 
+const GuessInput = () => {
+  const [inputValue, setInputValue] = useState('');
+  const dispatch = useDispatch();
+  const { status } = useSelector((state) => state.game);
 
-const InputField = styled.input`
-  width: 80%;
-  padding: 10px;
-  margin-bottom: 10px;
-`;
-
-const SubmitButton = styled.button`
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-`;
-
-function GuessInput({ onSubmit }) {
-  const [guess, setGuess] = useState('');
+  const handleChange = (e) => {
+    setInputValue(e.target.value.toUpperCase());
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(guess);
-    setGuess('');
+    if (inputValue.length === 5 && status === 'playing') {
+      dispatch(makeGuess(inputValue));
+      setInputValue('');
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <InputField 
-        type="text" 
-        name="guess" 
-        onChange={(e) => setGuess(e.target.value)}
-        maxLength={5}
-        required 
+      <input
+        type="text"
+        maxLength="5"
+        value={inputValue}
+        onChange={handleChange}
+        disabled={status !== 'playing'}
+        placeholder="Enter a 5-letter word"
       />
-      <SubmitButton type="submit">Guess</SubmitButton>
+      <button type="submit" disabled={inputValue.length !== 5 || status !== 'playing'}>
+        Guess
+      </button>
     </form>
   );
-}
+};
 
 export default GuessInput;

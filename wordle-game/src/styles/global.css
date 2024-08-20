@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .App {
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .board {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 10px;
+  }
+  
+  .row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+  }
+  
+  .end-game-state {
+    margin-top: 20px;
+  }
+  
+  input {
+    font-size: 1.2em;
+    padding: 5px;
+    margin: 10px 0;
+  }
+  
+  button {
+    font-size: 1em;
+    padding: 5px 10px;
+  }

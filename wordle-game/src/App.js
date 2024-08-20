@@ -1,28 +1,36 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { startGame, makeGuess } from './features/game/gameSlice';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Board from './components/Board';
 import GuessInput from './components/GuessInput';
-import GuessList from './components/GuessList';
-import GameStatus from './components/GameStatus';
+import EndGameState from './components/EndGameState';
+import { resetGame } from './features/game/gameSlice';
+import useWordAPI from './hooks/useWordAPI';
 
 function App() {
+  const { status, targetWord } = useSelector((state) => state.game);
   const dispatch = useDispatch();
-  const { guesses, attemptsLeft, status } = useSelector((state) => state.game);
+  
+  useWordAPI(); // Fetch the target word on mount
 
-  useEffect(() => {
-    dispatch(startGame());
-  }, [dispatch]);
-
-  const handleGuess = (guess) => {
-    dispatch(makeGuess(guess));
+  const handleRestart = () => {
+    dispatch(resetGame());
   };
 
   return (
-    <div>
-      <h1>Wordle Game</h1>
-      <GuessInput onSubmit={handleGuess} />
-      <GuessList guesses={guesses} />
-      <GameStatus attemptsLeft={attemptsLeft} status={status} />
+    <div className="App">
+      <header>
+        <h1>Wordle Game</h1>
+      </header>
+      <main>
+        {status === 'playing' ? (
+          <>
+            <Board />
+            <GuessInput />
+          </>
+        ) : (
+          <EndGameState status={status} targetWord={targetWord} onRestart={handleRestart} />
+        )}
+      </main>
     </div>
   );
 }

@@ -68,3 +68,39 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# worlde-lammari
+
+## About
+
+Wordle is a popular online word game where players have a limited number of attempts to guess a secret word, with feedback provided for each guess in the form of colored tiles indicating correct and incorrect letters and positions.
+
+## Installation
+
+Follow these steps to run the app on your local machine:
+
+1. Clone the Project:
+
+```bash
+git clone https://github.com/salihalammari/wordle-salihalammari.git
+```
+2. Navigate to the App Directory:
+
+```bash
+cd worlde-game
+```
+
+3. Install Dependencies:
+
+```bash
+npm install
+```
+
+4. Run the Application:
+
+```bash
+npm start
+```
+Open http://localhost:3000 with your browser to see the result.
+
+Or you can check deployed site:
